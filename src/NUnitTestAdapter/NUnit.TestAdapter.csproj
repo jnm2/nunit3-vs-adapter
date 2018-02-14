@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.0'">
+    <PackageReference Include="System.Reflection.Metadata" Version="1.5.0" />
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.2" />
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="15.0.0" PrivateAssets="All" />

@@ -21,13 +21,19 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-using System;
-
-namespace NUnit.VisualStudio.TestAdapter.Metadata
+#if !NET35
+namespace NUnit.VisualStudio.TestAdapter.Metadata.MetadataReaderHelpers
 {
-    internal interface IMetadataProvider : IDisposable
+    internal struct ResolvedAssembly
     {
-        TypeResult? GetDeclaringType(string assemblyPath, string reflectedTypeName, string methodName);
-        TypeResult? GetStateMachineType(string assemblyPath, string reflectedTypeName, string methodName);
+        public ResolvedAssembly(string assemblyPath, System.Reflection.Metadata.MetadataReader reader)
+        {
+            AssemblyPath = assemblyPath;
+            Reader = reader;
+        }
+
+        public string AssemblyPath { get; }
+        public System.Reflection.Metadata.MetadataReader Reader { get; }
     }
 }
+#endif

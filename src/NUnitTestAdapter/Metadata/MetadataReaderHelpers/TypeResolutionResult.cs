@@ -21,13 +21,21 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-using System;
+#if !NET35
+using System.Reflection.Metadata;
 
-namespace NUnit.VisualStudio.TestAdapter.Metadata
+namespace NUnit.VisualStudio.TestAdapter.Metadata.MetadataReaderHelpers
 {
-    internal interface IMetadataProvider : IDisposable
+    internal struct TypeResolutionResult
     {
-        TypeResult? GetDeclaringType(string assemblyPath, string reflectedTypeName, string methodName);
-        TypeResult? GetStateMachineType(string assemblyPath, string reflectedTypeName, string methodName);
+        public TypeResolutionResult(ResolvedAssembly? externalAssembly, TypeDefinition typeDefinition)
+        {
+            ExternalAssembly = externalAssembly;
+            TypeDefinition = typeDefinition;
+        }
+
+        public ResolvedAssembly? ExternalAssembly { get; }
+        public TypeDefinition TypeDefinition { get; }
     }
 }
+#endif

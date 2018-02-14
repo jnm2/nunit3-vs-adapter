@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-#if !NETCOREAPP1_0
+#if NET35
 using System;
 using System.IO;
 using System.Reflection;
@@ -64,12 +64,12 @@ namespace NUnit.VisualStudio.TestAdapter.Metadata
                 AppDomain.Unload(_appDomain);
         }
 
-        public TypeInfo? GetDeclaringType(string assemblyPath, string reflectedTypeName, string methodName)
+        public TypeResult? GetDeclaringType(string assemblyPath, string reflectedTypeName, string methodName)
         {
             return GetHelper().GetDeclaringType(assemblyPath, reflectedTypeName, methodName);
         }
 
-        public TypeInfo? GetStateMachineType(string assemblyPath, string reflectedTypeName, string methodName)
+        public TypeResult? GetStateMachineType(string assemblyPath, string reflectedTypeName, string methodName)
         {
             return GetHelper().GetStateMachineType(assemblyPath, reflectedTypeName, methodName);
         }

@@ -28,17 +28,17 @@ namespace NUnit.VisualStudio.TestAdapter.Metadata
 #if !NETCOREAPP1_0
     [Serializable]
 #endif
-    public struct TypeInfo
+    public struct TypeResult
     {
 #if !NETCOREAPP1_0
-        public TypeInfo(Type type)
+        public TypeResult(Type type)
         {
             AssemblyPath = type.Assembly.Location;
             FullName = type.FullName;
         }
 #endif
 
-        public TypeInfo(string assemblyPath, string fullName)
+        public TypeResult(string assemblyPath, string fullName)
         {
             AssemblyPath = assemblyPath;
             FullName = fullName;

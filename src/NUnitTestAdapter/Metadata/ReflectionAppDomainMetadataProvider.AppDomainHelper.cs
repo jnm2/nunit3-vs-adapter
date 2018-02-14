@@ -21,7 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ***********************************************************************
 
-#if !NETCOREAPP1_0
+#if NET35
 using System;
 using System.Linq;
 using System.Reflection;
@@ -32,14 +32,14 @@ namespace NUnit.VisualStudio.TestAdapter.Metadata
     {
         private sealed class AppDomainHelper : MarshalByRefObject
         {
-            public TypeInfo? GetDeclaringType(string assemblyPath, string reflectedTypeName, string methodName)
+            public TypeResult? GetDeclaringType(string assemblyPath, string reflectedTypeName, string methodName)
             {
                 var type = TryGetSingleMethod(assemblyPath, reflectedTypeName, methodName)?.DeclaringType;
                 if (type == null) return null;
-                return new TypeInfo(type);
+                return new TypeResult(type);
             }
 
-            public TypeInfo? GetStateMachineType(string assemblyPath, string reflectedTypeName, string methodName)
+            public TypeResult? GetStateMachineType(string assemblyPath, string reflectedTypeName, string methodName)
             {
                 var method = TryGetSingleMethod(assemblyPath, reflectedTypeName, methodName);
                 if (method == null) return null;
@@ -67,7 +67,7 @@ namespace NUnit.VisualStudio.TestAdapter.Metadata
                 }
 
                 if (candidate == null) return null;
-                return new TypeInfo(candidate);
+                return new TypeResult(candidate);
             }
 
             private static MethodInfo TryGetSingleMethod(string assemblyPath, string reflectedTypeName, string methodName)

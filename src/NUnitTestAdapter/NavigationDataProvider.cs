@@ -32,9 +32,7 @@ namespace NUnit.VisualStudio.TestAdapter
     {
         private readonly string _assemblyPath;
         private readonly Dictionary<string, DiaSession> _sessionsByAssemblyPath = new Dictionary<string, DiaSession>(StringComparer.OrdinalIgnoreCase);
-#if !NETCOREAPP1_0
         private readonly IMetadataProvider _metadataProvider;
-#endif
 
         public NavigationDataProvider(string assemblyPath)
         {
@@ -43,16 +41,16 @@ namespace NUnit.VisualStudio.TestAdapter
 
             _assemblyPath = assemblyPath;
 
-#if !NETCOREAPP1_0
+#if NET35
             _metadataProvider = new ReflectionAppDomainMetadataProvider();
+#else
+            _metadataProvider = new MetadataReaderMetadataProvider();
 #endif
         }
 
         public void Dispose()
         {
-#if !NETCOREAPP1_0
             _metadataProvider.Dispose();
-#endif
             foreach (var session in _sessionsByAssemblyPath.Values)
                 session.Dispose();
         }
@@ -60,10 +58,8 @@ namespace NUnit.VisualStudio.TestAdapter
         public NavigationData GetNavigationData(string className, string methodName)
         {
             return TryGetSessionData(_assemblyPath, className, methodName)
-#if !NETCOREAPP1_0
                 ?? TryGetSessionData(_metadataProvider.GetStateMachineType(_assemblyPath, className, methodName), "MoveNext")
                 ?? TryGetSessionData(_metadataProvider.GetDeclaringType(_assemblyPath, className, methodName), methodName)
-#endif
                 ?? NavigationData.Invalid;
         }
 
@@ -78,7 +74,7 @@ namespace NUnit.VisualStudio.TestAdapter
                 new NavigationData(data.FileName, data.MinLineNumber);
         }
 
-        private NavigationData TryGetSessionData(TypeInfo? declaringType, string methodName)
+        private NavigationData TryGetSessionData(TypeResult? declaringType, string methodName)
         {
             return declaringType == null ? null :
                 TryGetSessionData(declaringType.Value.AssemblyPath, declaringType.Value.FullName, methodName);
