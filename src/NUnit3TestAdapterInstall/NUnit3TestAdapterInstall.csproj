@@ -26,8 +26,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup>
-    <VsixSourceItem Include="$(VsixInputFileLocation)\nunit.engine.api.dll" />
-    <VsixSourceItem Include="$(VsixInputFileLocation)\nunit.engine.dll" />
     <VsixSourceItem Include="$(VsixInputFileLocation)\NUnit3.TestAdapter.dll" />
     <VsixSourceItem Include="$(VsixInputFileLocation)\NUnit3.TestAdapter.pdb" />
   </ItemGroup>

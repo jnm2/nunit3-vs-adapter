@@ -52,7 +52,10 @@ namespace NUnit.VisualStudio.TestAdapter
 
         private static readonly string[] AllowedResourceAssemblyNames =
         {
-            "Mono.Cecil"
+            "Mono.Cecil",
+            "nunit.engine",
+            "nunit.engine.netstandard",
+            "nunit.engine.api"
         };
 
         private static Stream TryGetResourceAssemblyStream(AssemblyName assemblyName)

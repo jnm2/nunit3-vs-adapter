@@ -57,8 +57,15 @@
   <!-- Before RemoveReferencesToEmbeddedAssembles (our thing in Common.props which disappears the ReferencePath that we need here). -->
   <Target Name="AddReferencesAsEmbeddedResources" BeforeTargets="RemoveReferencesToEmbeddedAssembles">
     <ItemGroup>
-      <!-- Add Mono.Cecil.dll as an embedded reference named ‘Assemblies\Mono.Cecil.dll’ -->
-      <EmbeddedResource Include="@(ReferencePath)" Condition="'%(Filename)' == 'Mono.Cecil'" KeepMetadata="x" LogicalName="Assemblies\%(Filename)%(Extension)" />
+      <!-- Add Mono.Cecil.dll and NUnit engine DLLs as embedded resources -->
+      <EmbeddedResource
+        Include="@(ReferencePath)"
+        Condition="'%(Filename)' == 'Mono.Cecil'
+                or '%(Filename)' == 'nunit.engine'
+                or '%(Filename)' == 'nunit.engine.netstandard'
+                or '%(Filename)' == 'nunit.engine.api'"
+        KeepMetadata="x"
+        LogicalName="Assemblies\%(Filename)%(Extension)" />
     </ItemGroup>
   </Target>
 
