@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net45;netcoreapp1.0</TargetFrameworks>
     <RootNamespace>Referencing_Mono_Cecil</RootNamespace>
-    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
