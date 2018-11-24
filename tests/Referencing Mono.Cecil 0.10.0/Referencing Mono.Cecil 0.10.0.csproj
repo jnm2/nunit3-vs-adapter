@@ -9,9 +9,10 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
     <PackageReference Include="Mono.Cecil" Version="0.10.0" />
     <PackageReference Include="NUnit" Version="*" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.11.2" />
   </ItemGroup>
-   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="nunit.engine.api" Version="3.9.0" />
   </ItemGroup>
 
